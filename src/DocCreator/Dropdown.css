@@ -1,0 +1,161 @@
+.side-dropdown-container{
+    margin-top: 5%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.side-dropdown-toggle{
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    width: 60%;
+    background-color: rgb(0,0,0,0);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    border-radius: 10px;
+    transition: all 0.5s;
+    color:rgb(250,250,250, 0.5);
+    padding:1%;
+    cursor:default;
+    margin-bottom: 3%;
+    font-size: 0.8rem;
+    outline: 1px solid rgb(255, 114, 114);
+}
+.side-dropdown-toggle:hover{
+    width: 70%;    
+    font-size: 0.9rem;
+    padding: 1%;
+}
+.border{
+    border:1px solid rgb(100, 100, 100,0.1) !important;
+}
+.dropdown-button{
+    background-color: rgb(0,0,0,0);
+    border: none;
+    color:rgb(250,250,250, 0.5);
+}  
+.side-dropdown-options{
+    transition: all 0.4s ease-in-out;
+    max-height: 0px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.dropdown-option{
+    border: none;
+    color: rgb(255,255,255,0.3);
+    background-color: rgb(255,255,255,0.05);
+    opacity: 0.6;
+}
+.dropdown-option:hover{
+    opacity: 1 !important;
+    border:1px solid rgb(100, 100, 100,0.2) !important;
+    background-color: rgb(255,255,255,0) !important;
+}
+.dropdown-visible{
+    max-height: 100px !important;
+}
+.top-input-field{
+    margin-top: 2%;
+    border-radius: 5px;
+}
+.input-field{
+    border-radius: 5px;
+    color: rgb(255,255,255,0.3);
+    border: none;
+    transition: all 0.5s;
+    margin-top:1%;
+    width: 60%;
+    /* width: 150px; */
+    background-color: rgb(100,100,100,0.2) !important;
+   
+    opacity: 0.5;
+    font-size:0.9em;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+
+}
+.input-field:hover{
+    opacity: 1 !important;
+    background-color: rgb(255,255,255,0.1) !important;
+    border:1px solid rgb(100, 100, 100,0.2) !important;
+    width: 75% !important;
+}
+.input-field:focus{
+    font-size: 0.95em;
+    opacity: 1 !important;
+    background-color: rgb(255,255,255,0.1) !important;
+    border:1px solid rgb(100, 100, 100,0.2) !important;
+    width: 75% !important;
+    /* outline: none; */
+}
+
+.input-field-container{
+    margin-left: auto;
+    margin-right: auto;
+    padding:10%;
+    background-color: rgb(255,255,255,0);
+    transition: all 0.5s;
+    /* border: 1px solid red; */
+}
+.input-header{
+    font-size: 0.8em;
+}
+.input-container{
+    margin-top: 2%;
+}
+.field-filled{
+    outline: 1px solid rgb(63, 78, 63) !important;
+ 
+}
+.field-unfilled{
+    outline: 1px solid rgb(184, 98, 98);
+    outline:none;
+    
+}
+.submit-button {
+    border: none;
+    width: 60%;
+    background-color: rgb(0,0,0,0);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+
+    border-radius: 10px;
+    transition: all 0.5s;
+    color:rgb(250,250,250, 0.5);
+    padding:1%;
+    cursor:default;
+    margin-bottom: 3%;
+    font-size: 0.8rem;
+  }
+.submit-button span{
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+.submit-button:hover span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+.submit-button:hover span {
+    padding-right: 25px;
+}
+.submit-button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+.show-input-fields{
+    max-height: 500px !important;
+}
+.hide-input-fields{
+    overflow: hidden;
+    max-height: 0px;
+    transition: all 3s;
+}

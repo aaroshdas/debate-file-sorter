@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+html{
+  font-family: "Roboto";
+  scroll-behavior: smooth;
+  background-color: rgb(25,25,25);
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.body-container{
+  margin-left: auto;
+  margin-right: auto;
+  height: 100vh;
+  width: 90vw;
   color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: all 0.5s;
+  gap:5px
+}
+.left-container{
+  max-width: 300px;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+  color:rgb(250,250,250, 0.5);
+  flex-grow: 1;
+  overflow: hidden;
+  transition: all 0.5s;
+   opacity: 0.8;
+  font-size: 1rem;
+  filter: blur(0.5px);
+  border-radius: 5px;
+}
+.left-container:hover{
+  max-width:350px;
+  opacity: 1;
+  filter: blur(0px);
+}
+.left-inside-container{
+  width:100%;
+  padding-top: 5%;
+  text-align: center;
+  min-width: 300px;
+  /* padding-left: 25%; */
+}
+.expand-left{
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.01);
+  color:rgb(250,250,250, 0.5);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+  transform: rotate(0deg);
+  transition: all 0.5s;
+  opacity: 0.5;
+  width: 20px;
+}
+.expand-left:hover{
+  opacity: 1;
+  width: 25px;
+  border:1px solid rgb(100, 100, 100,0.1);
+  
+}
+.shrink-left{
+  transform: rotate(180deg) !important;
 }
 
-.App-link {
-  color: #61dafb;
+.right-container{
+  padding: 1%;
+  flex-grow: 3;
+  transition: all 0.5s;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+  color:rgb(250,250,250, 0.5);
+  border-radius: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.small-width{
+  max-width: 0px !important;
+  /* opacity: 0 !important; */
 }

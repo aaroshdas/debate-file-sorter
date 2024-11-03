@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useState } from 'react';
+
+import DocCreator from './DocCreator/DocCreator';
+
 import './App.css';
+import './Scroll.css'
+
+// import { Redis } from "https://esm.sh/@upstash/redis";
+// const redis = new Redis({
+//   url: process.env.REACT_APP_UPSTASH_URL,
+//   token: process.env.REACT_APP_UPSTASH_TOKEN
+// });
+
 
 function App() {
+  const [leftSideToggled, setLeftSideToggled] = useState(true)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className='body-container'>
+        <div>
+          <button id = "expand-left" className={`expand-left ${leftSideToggled ? "":"shrink-left"}`} onClick={()=>{setLeftSideToggled(!leftSideToggled)}}>&#62;</button>
+        </div>
+        <div id = "left-container" className={`left-container ${leftSideToggled ? "":"small-width"}`}>
+          <div className = "left-inside-container">
+          <main>Add New Document</main>
+          <DocCreator/>
+          </div>
+        </div>
+        <div className="right-container">
+          <main>Documents</main>
+        </div>
+      </div>
     </div>
   );
 }
