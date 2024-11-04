@@ -44,12 +44,22 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+
+}
+.side-dropdown-options-overflow{
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
 }
 .dropdown-option{
     border: none;
     color: rgb(255,255,255,0.3);
     background-color: rgb(255,255,255,0.05);
     opacity: 0.6;
+    width: 100%;
+}
+.option-container{
+    display: flex;
+    flex-direction: row;
 }
 .dropdown-option:hover{
     opacity: 1 !important;
@@ -68,7 +78,7 @@
     color: rgb(255,255,255,0.3);
     border: none;
     transition: all 0.5s;
-    margin-top:1%;
+    margin-top:3%;
     width: 60%;
     /* width: 150px; */
     background-color: rgb(100,100,100,0.2) !important;
@@ -112,8 +122,8 @@
  
 }
 .field-unfilled{
-    outline: 1px solid rgb(184, 98, 98);
-    outline:none;
+    outline: 1px solid rgb(184, 98, 98, 0.2);
+    /* outline:none; */
     
 }
 .submit-button {
@@ -159,3 +169,39 @@
     max-height: 0px;
     transition: all 3s;
 }
+.create-new-topic{
+    text-align: center;
+    outline: none;
+    color: rgb(255,255,255,0.3);
+    border: none;
+    background-color: rgb(255,255,255,0.05);
+    opacity: 0.5;
+    font-size:0.85em;
+    
+    opacity: 0.6;
+    flex-grow: 1;
+    width: 89%;
+   
+}
+.create-new-topic:hover{
+    opacity: 1 !important;
+    background-color: rgb(255,255,255,0) !important;
+    border:1px solid rgb(100, 100, 100,0.2) !important;
+}
+.new-topic-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.create-new-topic-button{
+    width: 12%;
+    height: 2%;
+    background-color: rgb(255,255,255,0.05) !important;
+    /* box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3); */
+    outline: none;
+    border: none;
+    color: rgb(255,255,255,0.3);
+    transition: all 0.5s;
+}
+

@@ -6,12 +6,6 @@ import DocCreator from './DocCreator/DocCreator';
 import './App.css';
 import './Scroll.css'
 
-// import { Redis } from "https://esm.sh/@upstash/redis";
-// const redis = new Redis({
-//   url: process.env.REACT_APP_UPSTASH_URL,
-//   token: process.env.REACT_APP_UPSTASH_TOKEN
-// });
-
 
 function App() {
   const [leftSideToggled, setLeftSideToggled] = useState(true)

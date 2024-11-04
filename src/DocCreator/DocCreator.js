@@ -1,12 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Dropdown.css'
+
+//things to do:
+//submit button functionality, make sure only called when enough green
+//save {label:x, side:x, topic:x} redis
+//work on right container to read from redis
+
+import { Redis } from "https://esm.sh/@upstash/redis";
+const redis = new Redis({
+  url: process.env.REACT_APP_UPSTASH_URL,
+  token: process.env.REACT_APP_UPSTASH_TOKEN
+});
+
+
+async function updateRedis(topicDropdownOptions){
+    await redis.set('topics', topicDropdownOptions);
+}
+
 function onUserType(){
-    // const allFields = document.getElementsByClassName("input-field");
-    // for(let k=0; k< allFields.length; k++){
-    //     if(allFields[k].value.toString().length > 0){  
-    //         allFields[k].classList.add("field-filled");
-    //     }
-    // }
+    const allFields = document.getElementsByClassName("input-field");
+    for(let k=0; k< allFields.length; k++){
+        if(allFields[k].value.toString().length > 0){  
+            allFields[k].classList.add("field-filled");
+        }
+    }
+    document.getElementById("file-name").value.length > 0 && document.getElementById("file-link").value.length > 0 ? document.getElementById('submit-button').classList.add("field-filled"): updateSubmitButton();
+}
+function updateSubmitButton(){
+    document.getElementById('submit-button').classList.add("field-unfilled"); if(document.getElementById('submit-button').classList.contains("field-filled")){document.getElementById('submit-button').classList.remove("field-filled")}
+}
+async function getTopicData(setTopicDropdownOption){
+    let data = await redis.get('topics');
+    if(data.length >0){
+        setTopicDropdownOption(data);
+    }
 }
 function DocCreator(){
     const[sideDropdownActive, setSideDropdownActive] = useState(false);
@@ -17,6 +44,15 @@ function DocCreator(){
     const[selectedSide, setSelectedSide] = useState("[side]");
     const[selectedType, setSelectedType] = useState("[type]");
     const[selectedTopic, setSelectedTopic] = useState("[topic]");
+
+
+    const[topicDropdownOption, setTopicDropdownOption] = useState([
+        {
+            label:"None",
+            value:"None",
+            intRep:0,
+        }]
+    );
 
     let sideDropdownOption=[{
         label:"Negative",
@@ -33,12 +69,6 @@ function DocCreator(){
         intRep:2
     }
     ]
-    let topicDropdownOption =[{
-        label:"None",
-        value:"None",
-        intRep:0,
-    },
-    ]
     let typeDropdownOption=[{
         label:"Case",
         value:"Case",
@@ -52,8 +82,17 @@ function DocCreator(){
         label:"Opponent Case",
         value:"O. Case",
         intRep:2
+    },
+    {
+        label:"None",
+        value:"None",
+        intRep:3
     }];
-
+    useEffect(()=>{
+        getTopicData(setTopicDropdownOption);
+    
+    }, []);
+    
     return(
         <div>
              <div className="side-dropdown-container">
@@ -68,18 +107,71 @@ function DocCreator(){
                     <main>{selectedTopic}</main>        
                     <main id = "side-drop-button-3" className="dropdown-button">+</main>    
                 </button>
-                <div className={`side-dropdown-options ${topicDropdownActive ? "dropdown-visible":""}`}>
+                <div className={`side-dropdown-options-overflow side-dropdown-options ${topicDropdownActive ? "dropdown-visible":""}`}>
                    {topicDropdownOption.map((option, index)=>{
-                    return <button className="dropdown-option" key={index} onClick={()=>{
+                    return <div className="option-container" key={index}><button className="dropdown-option" onClick={()=>{
                         setSelectedTopic(option.value);
                         setTopicDropdownActive(false);
                         document.getElementById("side-toggle-3").classList.add("field-filled");
                         if(document.getElementById("side-toggle-3").classList.contains("border")){
-                            document.getElementById("side-toggle-3").classList.remove("border");
-                            
+                            document.getElementById("side-toggle-3").classList.remove("border");                     
                         }
-                    }}>{option.label}</button>
+
+                    }}>{option.value}</button>
+                    <button id = {`delete-topic${option.intRep}`} className="create-new-topic-button" onClick={()=>{
+                        
+                        document.getElementById(`delete-topic${option.intRep}`).classList.add("border");
+                        setTimeout(()=>{
+                            if(document.getElementById(`delete-topic${option.intRep}`)!= null && document.getElementById(`delete-topic${option.intRep}`).classList.contains("border")){
+                                document.getElementById(`delete-topic${option.intRep}`).classList.remove("border");
+                            }
+                        }, 500);
+                        let newTopicDropdown = topicDropdownOption;
+                        let k =0;
+                        for(let i = 0; i<newTopicDropdown.length; i++){
+                            if(newTopicDropdown[i].intRep === option.intRep){
+                                k=i;
+                                break;
+                            }
+                        }
+                        newTopicDropdown.splice(k, 1);
+                        setTopicDropdownOption(newTopicDropdown);
+                        setTopicDropdownActive(false);
+                        if(document.getElementById("side-toggle-3").classList.contains("border")){
+                            document.getElementById("side-toggle-3").classList.remove("border");                     
+                        }
+                        setTimeout(()=>{setTopicDropdownActive(true);}, 500);
+                        updateRedis(topicDropdownOption);
+                    }}>-</button>
+                    </div>
                    })}
+                   <div className="new-topic-container">
+                    <input id="create-new-topic" className="create-new-topic" placeholder="create new topic..." type="text">
+                    </input>
+                
+                    <button id = "create-new-topic-button" className="create-new-topic-button" onClick={()=>{
+                        document.getElementById("create-new-topic-button").classList.add("border");
+                        setTimeout(()=>{
+                            document.getElementById("create-new-topic-button").classList.remove("border");
+                        }, 500);
+                        let newTopicDropdown = topicDropdownOption;
+                        newTopicDropdown.push({
+                            label:document.getElementById("create-new-topic").value,
+                            value:document.getElementById("create-new-topic").value.toString().slice(0,7),
+                            intRep:Math.random()
+                        });
+                        setTopicDropdownOption(newTopicDropdown);
+                        document.getElementById("create-new-topic").value =""
+                        setTopicDropdownActive(false);
+                       
+                        if(document.getElementById("side-toggle-3").classList.contains("border")){
+                            document.getElementById("side-toggle-3").classList.remove("border");                     
+                        }
+                        setTimeout(()=>{setTopicDropdownActive(true);}, 500);
+                        updateRedis(topicDropdownOption);
+
+                    }}>+</button>
+                   </div>
                 </div>
             </div>
 
@@ -105,7 +197,7 @@ function DocCreator(){
                         if(document.getElementById("side-toggle").classList.contains("border")){
                             document.getElementById("side-toggle").classList.remove("border");
                         }
-                    }}>{option.label}</button>
+                    }}>{option.value}</button>
                    })}
                 </div>
             </div>
@@ -159,7 +251,7 @@ function DocCreator(){
                 </div>
             </div>
             <div className="side-dropdown-container">
-                 <button id = "submit-button" className="submit-button" onClick={()=>{
+                 <button id = "submit-button" className={`submit-button field-unfilled`} onClick={()=>{
                      document.getElementById("submit-button").classList.add("border");
                      setTimeout(()=>{
                          document.getElementById("submit-button").classList.remove("border");
