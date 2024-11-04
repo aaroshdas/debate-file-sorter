@@ -11,9 +11,6 @@ async function getDocs(setAllDocs){
     setAllDocs(allDocs)
 }
 async function createDoc(setAllDocs, selectedSide, selectedType, selectedTopic){
-    console.log(selectedSide)
-    console.log(selectedTopic)
-    console.log(selectedType)
     if(document.getElementById("file-name").value.length > 0 && document.getElementById("file-link").value.length > 0){
         const name = document.getElementById("file-name").value;
         const link = document.getElementById("file-link").value;

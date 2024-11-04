@@ -5,6 +5,7 @@
     width: 18% !important;
   }
 .docs-container{
+    margin-top: 1%;
     width: 90%;
     max-height: 0%;
     overflow: hidden;

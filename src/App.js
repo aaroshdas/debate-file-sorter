@@ -51,21 +51,25 @@ function App() {
                 </div>
                 <button id ='delete-button' className='delete-button' onClick={()=>{
                   let i =0;
+                  console.log(allDocs)
                   for(let k = 0; k<allDocs.length; k++){
-                    if(k.intRep === docData.intRep){
+                    console.log(allDocs[k].intRep)
+                    if(allDocs[k].intRep === docData.intRep){
                       i= k;
                       break;
                     }
-
-                    allDocs.splice(i, 1);
-      
-                    setAllDocs(allDocs);
-                    setShowDocs(false)
-                    setTimeout(()=>{
-                      setShowDocs(true);
-                    },500)
-                    redis.set('docs', allDocs);
                   }
+
+                  console.log(i)
+                  allDocs.splice(i, 1);
+                  console.log(allDocs)
+                  setAllDocs(allDocs);
+                  setShowDocs(false)
+                  setTimeout(()=>{
+                    setShowDocs(true);
+                  },500)
+                  redis.set('docs', allDocs);
+                  
                 }}>-</button>
               </div>
             }) : console.log("")}
@@ -78,7 +82,7 @@ function App() {
             else{
               document.getElementById("toggle-docs").innerHTML= "- docs"
             }
-          }}><span>+ docs</span></button>
+          }}><span>- docs</span></button>
         </div>
       </div>
     </div>
