@@ -1,18 +1,47 @@
 import React, { useState, useEffect } from "react";
 import './Dropdown.css'
 
-//things to do:
-//submit button functionality, make sure only called when enough green
-//save {label:x, side:x, topic:x} redis
-//work on right container to read from redis
-
 import { Redis } from "https://esm.sh/@upstash/redis";
 const redis = new Redis({
   url: process.env.REACT_APP_UPSTASH_URL,
   token: process.env.REACT_APP_UPSTASH_TOKEN
 });
-
-
+async function getDocs(setAllDocs){
+    let allDocs = await redis.get('docs')
+    setAllDocs(allDocs)
+}
+async function createDoc(setAllDocs, selectedSide, selectedType, selectedTopic){
+    console.log(selectedSide)
+    console.log(selectedTopic)
+    console.log(selectedType)
+    if(document.getElementById("file-name").value.length > 0 && document.getElementById("file-link").value.length > 0){
+        const name = document.getElementById("file-name").value;
+        const link = document.getElementById("file-link").value;
+        const info = document.getElementById("file-info").value;
+        const minTime = document.getElementById("min-time").value;
+        const maxTime = document.getElementById("max-time").value;
+        let allDocs = await redis.get('docs')
+        allDocs.push({
+            docName:name,
+            docLink:link,
+            docInfo:info,
+            minTime: minTime,
+            maxTime: maxTime,
+            type:selectedType,
+            side:selectedSide,
+            topic:selectedTopic,
+            intRep: Math.random()
+        })
+        await redis.set('docs', allDocs);
+        document.getElementById("file-name").value ="";
+        document.getElementById("file-link").value= "";
+        document.getElementById("file-info").value= "";
+        document.getElementById("min-time").value= "";
+        document.getElementById("max-time").value= "";
+      
+        setAllDocs(allDocs)
+    }
+}
 async function updateRedis(topicDropdownOptions){
     await redis.set('topics', topicDropdownOptions);
 }
@@ -35,7 +64,8 @@ async function getTopicData(setTopicDropdownOption){
         setTopicDropdownOption(data);
     }
 }
-function DocCreator(){
+
+function DocCreator({setAllDocs}){
     const[sideDropdownActive, setSideDropdownActive] = useState(false);
     const[typeDropdownActive, setTypeDropdownActive] = useState(false);
     const[topicDropdownActive, setTopicDropdownActive] = useState(false);
@@ -90,8 +120,8 @@ function DocCreator(){
     }];
     useEffect(()=>{
         getTopicData(setTopicDropdownOption);
-    
-    }, []);
+        getDocs(setAllDocs)
+    }, [setAllDocs]);
     
     return(
         <div>
@@ -157,7 +187,7 @@ function DocCreator(){
                         let newTopicDropdown = topicDropdownOption;
                         newTopicDropdown.push({
                             label:document.getElementById("create-new-topic").value,
-                            value:document.getElementById("create-new-topic").value.toString().slice(0,7),
+                            value:document.getElementById("create-new-topic").value.toString().split(" ")[0],
                             intRep:Math.random()
                         });
                         setTopicDropdownOption(newTopicDropdown);
@@ -243,15 +273,16 @@ function DocCreator(){
                     <input id="file-link" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="text" placeholder="doc link..."/>
                 </div>
                 <div className="input-container">
-                    <main className="input-header">time to read (in seconds) (optional)</main>
-                    <input id="min-time" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="number" placeholder="min time (optional)..."/>
+                    <main className="input-header">time to read (min.sec) (optional)</main>
+                    <input id="min-time" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="number" placeholder="min time (optional)...   ex 3.40"/>
                 </div>
                 <div>
-                    <input id="max-time" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="number" placeholder="max time (optional)..."/>
+                    <input id="max-time" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="number" placeholder="max time (optional)...   ex 2.50"/>
                 </div>
             </div>
             <div className="side-dropdown-container">
                  <button id = "submit-button" className={`submit-button field-unfilled`} onClick={()=>{
+                     createDoc(setAllDocs, selectedSide, selectedType, selectedTopic);
                      document.getElementById("submit-button").classList.add("border");
                      setTimeout(()=>{
                          document.getElementById("submit-button").classList.remove("border");
