@@ -22,7 +22,7 @@
     cursor:default;
     margin-bottom: 3%;
     font-size: 0.8rem;
-    outline: 1px solid rgb(255, 114, 114);
+    outline: 1px solid rgb(255, 114, 114, 0.3);
 }
 .side-dropdown-toggle:hover{
     width: 70%;    

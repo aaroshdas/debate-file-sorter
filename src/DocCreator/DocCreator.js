@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Dropdown.css'
 
+
 import { Redis } from "https://esm.sh/@upstash/redis";
 const redis = new Redis({
   url: process.env.REACT_APP_UPSTASH_URL,
@@ -62,7 +63,7 @@ async function getTopicData(setTopicDropdownOption){
     }
 }
 
-function DocCreator({setAllDocs}){
+function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption}){
     const[sideDropdownActive, setSideDropdownActive] = useState(false);
     const[typeDropdownActive, setTypeDropdownActive] = useState(false);
     const[topicDropdownActive, setTopicDropdownActive] = useState(false);
@@ -71,15 +72,6 @@ function DocCreator({setAllDocs}){
     const[selectedSide, setSelectedSide] = useState("[side]");
     const[selectedType, setSelectedType] = useState("[type]");
     const[selectedTopic, setSelectedTopic] = useState("[topic]");
-
-
-    const[topicDropdownOption, setTopicDropdownOption] = useState([
-        {
-            label:"None",
-            value:"None",
-            intRep:0,
-        }]
-    );
 
     let sideDropdownOption=[{
         label:"Negative",
@@ -118,7 +110,7 @@ function DocCreator({setAllDocs}){
     useEffect(()=>{
         getTopicData(setTopicDropdownOption);
         getDocs(setAllDocs)
-    }, [setAllDocs]);
+    }, [setAllDocs, setTopicDropdownOption]);
     
     return(
         <div>
@@ -167,7 +159,7 @@ function DocCreator({setAllDocs}){
                         if(document.getElementById("side-toggle-3").classList.contains("border")){
                             document.getElementById("side-toggle-3").classList.remove("border");                     
                         }
-                        setTimeout(()=>{setTopicDropdownActive(true);}, 500);
+                        setTimeout(()=>{setTopicDropdownActive(true);}, 0);
                         updateRedis(topicDropdownOption);
                     }}>-</button>
                     </div>
@@ -194,7 +186,7 @@ function DocCreator({setAllDocs}){
                         if(document.getElementById("side-toggle-3").classList.contains("border")){
                             document.getElementById("side-toggle-3").classList.remove("border");                     
                         }
-                        setTimeout(()=>{setTopicDropdownActive(true);}, 500);
+                        setTimeout(()=>{setTopicDropdownActive(true);}, 0);
                         updateRedis(topicDropdownOption);
 
                     }}>+</button>
@@ -283,7 +275,7 @@ function DocCreator({setAllDocs}){
                      document.getElementById("submit-button").classList.add("border");
                      setTimeout(()=>{
                          document.getElementById("submit-button").classList.remove("border");
-                     }, 500);
+                     },500);
                  }}><span>submit</span></button>
             </div>
             </div>
