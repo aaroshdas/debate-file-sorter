@@ -7,18 +7,24 @@ const redis = new Redis({
   url: process.env.REACT_APP_UPSTASH_URL,
   token: process.env.REACT_APP_UPSTASH_TOKEN
 });
-async function getDocs(setAllDocs){
-    let allDocs = await redis.get('docs')
+async function getDocs(setAllDocs, id){
+    let allDocs = await redis.get(`docs${id}`)
+    if(allDocs == null){
+        allDocs=[]
+    }
     setAllDocs(allDocs)
 }
-async function createDoc(setAllDocs, selectedSide, selectedType, selectedTopic){
+async function createDoc(setAllDocs, selectedSide, selectedType, selectedTopic,id){
     if(document.getElementById("file-name").value.length > 0 && document.getElementById("file-link").value.length > 0){
         const name = document.getElementById("file-name").value;
         const link = document.getElementById("file-link").value;
         const info = document.getElementById("file-info").value;
         const minTime = document.getElementById("min-time").value;
         const maxTime = document.getElementById("max-time").value;
-        let allDocs = await redis.get('docs')
+        let allDocs = await redis.get(`docs${id}`)
+        if(allDocs == null){
+            allDocs=[];
+        }
         allDocs.push({
             docName:name,
             docLink:link,
@@ -30,7 +36,7 @@ async function createDoc(setAllDocs, selectedSide, selectedType, selectedTopic){
             topic:selectedTopic,
             intRep: Math.random()
         })
-        await redis.set('docs', allDocs);
+        await redis.set(`docs${id}`, allDocs);
         document.getElementById("file-name").value ="";
         document.getElementById("file-link").value= "";
         document.getElementById("file-info").value= "";
@@ -40,8 +46,8 @@ async function createDoc(setAllDocs, selectedSide, selectedType, selectedTopic){
         setAllDocs(allDocs)
     }
 }
-async function updateRedis(topicDropdownOptions){
-    await redis.set('topics', topicDropdownOptions);
+async function updateRedis(topicDropdownOptions, id){
+    await redis.set(`topics${id}`, topicDropdownOptions);
 }
 
 function onUserType(){
@@ -56,14 +62,22 @@ function onUserType(){
 function updateSubmitButton(){
     document.getElementById('submit-button').classList.add("field-unfilled"); if(document.getElementById('submit-button').classList.contains("field-filled")){document.getElementById('submit-button').classList.remove("field-filled")}
 }
-async function getTopicData(setTopicDropdownOption){
-    let data = await redis.get('topics');
-    if(data.length >0){
+async function getTopicData(setTopicDropdownOption,id){
+    let data = await redis.get(`topics${id}`);
+    if(data !== null && data.length >0){
         setTopicDropdownOption(data);
+    }
+    else{
+        setTopicDropdownOption([
+            {
+                label:"None",
+                value:"None",
+                intRep:0,
+            }])
     }
 }
 
-function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption}){
+function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption, id}){
     const[sideDropdownActive, setSideDropdownActive] = useState(false);
     const[typeDropdownActive, setTypeDropdownActive] = useState(false);
     const[topicDropdownActive, setTopicDropdownActive] = useState(false);
@@ -108,9 +122,9 @@ function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption}){
         intRep:3
     }];
     useEffect(()=>{
-        getTopicData(setTopicDropdownOption);
-        getDocs(setAllDocs)
-    }, [setAllDocs, setTopicDropdownOption]);
+        getTopicData(setTopicDropdownOption, id);
+        getDocs(setAllDocs, id)
+    }, [setAllDocs, setTopicDropdownOption, id]);
     
     return(
         <div>
@@ -160,7 +174,7 @@ function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption}){
                             document.getElementById("side-toggle-3").classList.remove("border");                     
                         }
                         setTimeout(()=>{setTopicDropdownActive(true);}, 0);
-                        updateRedis(topicDropdownOption);
+                        updateRedis(topicDropdownOption, id);
                     }}>-</button>
                     </div>
                    })}
@@ -187,7 +201,7 @@ function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption}){
                             document.getElementById("side-toggle-3").classList.remove("border");                     
                         }
                         setTimeout(()=>{setTopicDropdownActive(true);}, 0);
-                        updateRedis(topicDropdownOption);
+                        updateRedis(topicDropdownOption, id);
 
                     }}>+</button>
                    </div>
@@ -271,7 +285,7 @@ function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption}){
             </div>
             <div className="side-dropdown-container">
                  <button id = "submit-button" className={`submit-button field-unfilled`} onClick={()=>{
-                     createDoc(setAllDocs, selectedSide, selectedType, selectedTopic);
+                     createDoc(setAllDocs, selectedSide, selectedType, selectedTopic, id);
                      document.getElementById("submit-button").classList.add("border");
                      setTimeout(()=>{
                          document.getElementById("submit-button").classList.remove("border");

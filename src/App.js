@@ -1,3 +1,9 @@
+/*
+1. style id + top into 2 boxes
+2. search bar to search items by name
+3. ordering items? might be a strech
+*/
+
 import React from 'react';
 import { useState } from 'react';
 
@@ -9,6 +15,7 @@ import './Scroll.css'
 import './DocHolder.css'
 
 import { Redis } from "https://esm.sh/@upstash/redis";
+
 const redis = new Redis({
   url: process.env.REACT_APP_UPSTASH_URL,
   token: process.env.REACT_APP_UPSTASH_TOKEN
@@ -23,6 +30,7 @@ function App() {
   const [selectedSide, setSelectedSide] = useState("None") 
   const [selectedType, setSelectedType] = useState("None") 
 
+  const [userID, setUserID] = useState(Math.round(Math.random()*1000000))
   const[topicDropdownOption, setTopicDropdownOption] = useState([
     {
         label:"None",
@@ -40,7 +48,15 @@ function App() {
         <div id = "left-container" className={`left-container ${leftSideToggled ? "":"small-width"}`}>
           <div className = "left-inside-container">
           <main>Add New Document</main>
-          <DocCreator setAllDocs={setAllDocs} setTopicDropdownOption={setTopicDropdownOption} topicDropdownOption={topicDropdownOption}/>
+          <DocCreator id = {userID} setAllDocs={setAllDocs} setTopicDropdownOption={setTopicDropdownOption} topicDropdownOption={topicDropdownOption}/>
+          <div className='left-login-container'>
+            <main>Current ID: {userID}</main>
+            <input className='input-field field-unfilled' id ="user-id-input" type="number" placeholder='join/create team (enter id)...'/>
+            <button id='submit-id' onClick={()=>{
+              setUserID(document.getElementById("user-id-input").value);
+              document.getElementById("user-id-input").classList.add("field-filled");
+            }}><span>submit</span></button>
+          </div>
           </div>
         </div>
         <div className="right-container">
@@ -84,22 +100,19 @@ function App() {
                   let i =0;
                   console.log(allDocs)
                   for(let k = 0; k<allDocs.length; k++){
-                    console.log(allDocs[k].intRep)
                     if(allDocs[k].intRep === docData.intRep){
                       i= k;
                       break;
                     }
                   }
 
-                  console.log(i)
                   allDocs.splice(i, 1);
-                  console.log(allDocs)
                   setAllDocs(allDocs);
                   setShowDocs(false)
                   setTimeout(()=>{
                     setShowDocs(true);
                   },0)
-                  redis.set('docs', allDocs);
+                  redis.set(`docs${userID}`, allDocs);
                   
                 }}>x</button>
               </div>
