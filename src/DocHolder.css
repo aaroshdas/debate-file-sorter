@@ -106,7 +106,7 @@
     
 }
 .doc-container:hover{
-    width: 32%;
+    width: 30%;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
     opacity: 1;
     font-size: 1.05rem;
