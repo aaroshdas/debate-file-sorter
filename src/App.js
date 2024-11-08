@@ -1,7 +1,10 @@
 /*
-1. style id + top into 2 boxes
-2. search bar to search items by name
-3. ordering items? might be a strech
+
+- search bar to search items by name
+- mark as not finished
+- editing boxes
+- ordering items? might be a strech
+- style id + top into 2 boxes * MAYBE
 */
 
 import React from 'react';

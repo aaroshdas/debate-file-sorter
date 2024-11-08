@@ -97,8 +97,7 @@
     border-radius: 5px;
     transition: all 0.5s;
     display: flex;
-    min-width: 25%;
-    max-width: 70%;
+    width: 25%;
     overflow-x:hidden;
     overflow-y: hidden;
     flex-direction: row;
@@ -107,7 +106,7 @@
     
 }
 .doc-container:hover{
-    max-width: 80%;
+    width: 32%;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
     opacity: 1;
     font-size: 1.05rem;
