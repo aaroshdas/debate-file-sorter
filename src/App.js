@@ -50,11 +50,12 @@ function App() {
           <main>Add New Document</main>
           <DocCreator id = {userID} setAllDocs={setAllDocs} setTopicDropdownOption={setTopicDropdownOption} topicDropdownOption={topicDropdownOption}/>
           <div className='left-login-container'>
-            <main>Current ID: {userID}</main>
+            <main className='right-header'>Current ID: {userID}</main>
             <input className='input-field field-unfilled' id ="user-id-input" type="number" placeholder='join/create team (enter id)...'/>
             <button id='submit-id' onClick={()=>{
               setUserID(document.getElementById("user-id-input").value);
               document.getElementById("user-id-input").classList.add("field-filled");
+              document.getElementById("user-id-input").value="";
             }}><span>submit</span></button>
           </div>
           </div>
