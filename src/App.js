@@ -49,22 +49,22 @@ function App() {
   },
   {
     value:"Empty",
-    label:"Emp.",
+    label:"Empt.",
     intRep: 3
   },
   {
     value:"Incomplete",
-    label:"Inc.",
+    label:"Inco.",
     intRep: 2
   },
   {
     value:"Usable",
-    label:"Usa.",
+    label:"Usab.",
     intRep: 2
   },
   {
     value:"Complete",
-    label:"Com.",
+    label:"Comp.",
     intRep: 1
   },
 ]

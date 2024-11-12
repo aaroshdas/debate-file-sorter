@@ -119,23 +119,32 @@ html{
     right: 0;
 }
 .item-dropdown-toggle{
+  width: 75%;
   padding: 3% !important;
   min-height: 10%;
+  font-size: 12px !important;
   outline: 1px solid rgb(255, 114, 114, 0.3);
   outline: none;
+  align-items: center;
 }
-.outline-Non{
+.item-dropdown-toggle:hover{
+  font-size: 13px !important;
+  width: 90% !important;
+  padding: 3% !important;
+  min-height: 13%;
+}
+.outline-None{
   outline: none;
 }
-.outline-Emp{
+.outline-Empt{
   outline: 1px solid rgb(255, 114, 114, 0.3);
 }
-.outline-Usa{
+.outline-Usab{
   outline: 1px solid rgb(231, 255, 184, 0.3);
 }
-.outline-Inc{
+.outline-Inco{
   outline: 1px solid rgb(255, 230, 176, 0.3);
 }
-.outline-Com{
+.outline-Comp{
   outline: 1px solid rgb(63, 78, 63);
 }
