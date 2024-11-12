@@ -34,6 +34,7 @@ async function createDoc(setAllDocs, selectedSide, selectedType, selectedTopic,i
             type:selectedType,
             side:selectedSide,
             topic:selectedTopic,
+            status:"None",
             intRep: Math.random()
         })
         await redis.set(`docs${id}`, allDocs);
