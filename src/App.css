@@ -10,7 +10,11 @@ html{
   color:rgb(250,250,250, 0.5);
 }
 .team-id-container{
-  margin-bottom: 0.5%;
+  margin-left: 5%;
+  margin-bottom: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .body-container{
   margin-left: auto;

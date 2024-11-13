@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
 
-//id --> name display name
 //doc editing
 
 import DocCreator from './DocCreator/DocCreator';
@@ -76,8 +75,8 @@ function Home() {
     <div>
     <div className='team-id-container'>
         <Link className='login-header' to="/"><main className='login-header'>Login</main></Link>
+        <main className='header'>Team: {team}</main>
         <main className='header'>Team ID: {userID}</main>
-        <main className='header'>Team name: {team}</main>
     </div>
 
     <div className='body-container'>

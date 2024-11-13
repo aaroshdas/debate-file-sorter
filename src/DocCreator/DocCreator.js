@@ -268,20 +268,20 @@ function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption, id
             <div className="input-field-container">
                 <div>
                     <main className="input-header top-input-field">doc info</main>
-                    <input id="file-name" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="text" placeholder="file name..."/>
+                    <input id="file-name" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="text" placeholder="name..."/>
                 </div>
                 <div>
-                    <input id="file-info" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="text" placeholder="file info (optional)..."/>
+                    <input id="file-info" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="text" placeholder="info (opt.)..."/>
                 </div>
                 <div>
-                    <input id="file-link" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="text" placeholder="doc link..."/>
+                    <input id="file-link" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="text" placeholder="link..."/>
                 </div>
                 <div className="input-container">
                     <main className="input-header">time to read (min.sec) (optional)</main>
-                    <input id="min-time" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="number" placeholder="min time (optional)...   ex 3.40"/>
+                    <input id="min-time" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="number" placeholder="min time..."/>
                 </div>
                 <div>
-                    <input id="max-time" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="number" placeholder="max time (optional)...   ex 2.50"/>
+                    <input id="max-time" onChange={()=>{onUserType();}} className="input-field field-unfilled" type="number" placeholder="max time..."/>
                 </div>
             </div>
             <div className="side-dropdown-container">
