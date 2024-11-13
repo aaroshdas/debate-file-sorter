@@ -127,6 +127,10 @@ html{
   font-size: 15px !important;
   outline: rgb(255,255,255,0.5);
 }
+
+.hide-element{
+  display: none !important;
+}
 .outline-Non{
   outline: none !important;
 }

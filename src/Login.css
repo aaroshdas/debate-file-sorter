@@ -5,6 +5,7 @@
     width: 35% !important;
     font-size: 17px !important;
     padding: 1%;
+    margin-top: 1% !important;
 }
 .login-input:hover{
     font-size: 19px !important;
@@ -16,28 +17,35 @@
     outline: 1px solid rgb(255,255,255,0.5);
 }
 
-#submit-id {
+.submit-id {
     border: none;
     width: 10%;
     background-color: rgb(0,0,0,0);
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
     font-size: 15px !important;
     border-radius: 10px;
-    transition: all 0.5s;
+    transition: all 0.4s;
     color:rgb(250,250,250, 0.5);
     padding:1.25%;
     cursor:default;
     margin-bottom: 3%;
-    margin-left: 1%;
     font-size: 0.8rem;
+    margin-top: 1%;
+    margin-left: 1%;
   }
-#submit-id span{
+.submit-id:hover{
+width: 13%;
+}
+#create-team-button{
+margin-left: 0% !important;
+}
+.submit-id span{
     display: inline-block;
     position: relative;
     transition: 0.5s;
   }
   
-#submit-id:hover span:after {
+.submit-id:hover span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -47,10 +55,10 @@
 
     
 }
-#submit-id:hover span {
+.submit-id:hover span {
     padding-right: 25px;
 }
-#submit-id:hover span:after {
+.submit-id:hover span:after {
     opacity: 1;
     right: 0;
 }

@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
 
-//search bar
 //id --> name display name
 //doc editing
 
@@ -33,6 +32,7 @@ function Home() {
  
     const location = useLocation();
     const id =location.state.id;
+    const team = location.state.teamName;
     const [userID, setUserID] = useState(id)
     if(userID === null || userID === -1){
         setUserID(Math.round(Math.random()*1000000));
@@ -77,6 +77,7 @@ function Home() {
     <div className='team-id-container'>
         <Link className='login-header' to="/"><main className='login-header'>Login</main></Link>
         <main className='header'>Team ID: {userID}</main>
+        <main className='header'>Team name: {team}</main>
     </div>
 
     <div className='body-container'>
