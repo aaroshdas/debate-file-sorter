@@ -1,3 +1,15 @@
+
+@font-face {
+    font-family: 'Mona Sans';
+    src:
+      url('./MonaSansVF-Regular.woff2') format('woff2 supports variations'),
+      url('./MonaSansVF-Regular.woff2') format('woff2-variations');
+    font-weight: 200 900;
+    font-stretch: 75% 125%;
+  }
+  html{
+    font-family: 'Mona Sans';
+  }
 .login-screen-container{
     display: flex;
     flex-direction: row;
@@ -10,6 +22,7 @@
 .hide-container-width{
     overflow: hidden;
     width: 0% !important;
+    outline: none !important;
 }
 .team-header{
     margin-top: 10%;
@@ -70,7 +83,7 @@
     transition: all 0.5s;
     display: flex;
     flex-direction: column;
-
+    outline: 1px solid rgb(100, 100, 100,0.1);;
     gap: 10px;
 }
 .login-register-container:hover{
@@ -117,7 +130,8 @@
     border: none;
     width: 42%;
     color: rgb(0,0,0,1) !important;
-    font-family: "Helvetica";
+    font-family: "Mona Sans" !important;
+
     font-weight: 500;
     background-color:rgb(255,255,255, 0.7);
 
@@ -166,11 +180,12 @@
 
 .scroll-anim{
     opacity: 1;
-    transition: all 0.6s;
+    transition: all 0.7s;
     transform: scale(1);
     transform: translateY(0);
     filter: blur(0px);
 }
+
 @media (prefers-reduced-motion: no-preference){
     .hide{
       opacity: 0 !important;
@@ -179,6 +194,7 @@
       filter: blur(1px) !important;
     }
 }
+
 
 .title-container{ 
     overflow: hidden;
@@ -198,8 +214,8 @@
     margin-top: 10%;
     margin-bottom: 1%;
     font-size: 55px;
-    font-family: 'Helvetica';
-    font-weight:100 !important;
+    /* font-family: 'Helvetica'; */
+    font-weight:300 !important;
 }
 .hide-container-max-width{
     overflow: hidden;

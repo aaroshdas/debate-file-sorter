@@ -12,6 +12,7 @@ html{
   color:rgb(255,255,255, 0.4);
 }
 .team-id-container{
+  font-family: "Roboto";
   margin-left: 5%;
   margin-bottom: 1%;
   display: flex;
@@ -19,6 +20,7 @@ html{
   justify-content: space-around;
 }
 .body-container{
+  
   margin-left: auto;
   margin-right: auto;
   height: 100vh;
@@ -31,6 +33,7 @@ html{
   gap:5px
 }
 .left-container{
+  
   max-width: 300px;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
   color:rgb(255,255,255, 0.7);

@@ -146,7 +146,7 @@ function Login(){
                 <main>{typeWriterText}</main>
             </div>
         </div>
-        <div className="login-screen-container scroll-anim hide">
+        <div id = "login-cont" className="login-screen-container scroll-anim hide">
             <div className={`login-register-container ${teamCreatorOpen ? "hide-container-width" : ""}`}>
                 <div className="team-creation-inner-cont">
                     <div className="login-container">

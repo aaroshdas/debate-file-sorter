@@ -79,7 +79,7 @@
 
 .doc-container{
     padding: 1.5%;
-    opacity: 0.35;
+    opacity: 0.45;
     border-radius: 5px;
     transition: all 0.5s;
     display: flex;
@@ -89,6 +89,7 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: rgb(100,100,100,0.1);
+    font-family: "Roboto";
     
 }
 .doc-container:hover{
