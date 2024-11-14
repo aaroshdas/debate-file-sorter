@@ -107,7 +107,7 @@ function Home() {
           <div className={`docs-container ${showDocs ? "docs-visible": ""} `}>
             {allDocs.length>0 ? allDocs.map((docData, index)=>{
               return <div className ={`doc-container ${(selectedTopic !== "None" &&selectedTopic !== "[topic]" && selectedTopic !== docData.topic) || (selectedSide !== "None" &&  selectedSide !== "[side]" && selectedSide !==docData.side) ||(selectedType !=="None" && selectedType !=="[type]" && selectedType!==docData.type) || (docData.docName.toLowerCase().includes(search.toLowerCase()) === false) ? "hide-container": ""}`} key={index}>
-                <div onClick={()=>{ window.open(docData.docLink);}} className='doc-info'>
+                <div onClick={()=>{ /*window.open(docData.docLink);*/}} className='doc-info'>
                   <main className='d-topic'>{docData.topic} </main>
                   <main className='d-name'> {docData.docName}</main>
                   <main className='d-type'>{docData.type}</main>
