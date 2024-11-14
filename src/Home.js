@@ -14,6 +14,8 @@ import './DocHolder.css'
 
 import { Redis } from "https://esm.sh/@upstash/redis";
 
+//delete toggle docs
+//add gear for config settings
 const redis = new Redis({
   url: process.env.REACT_APP_UPSTASH_URL,
   token: process.env.REACT_APP_UPSTASH_TOKEN
@@ -25,9 +27,9 @@ function Home() {
   const [allDocs, setAllDocs] = useState([]) 
   const [search, setSearch] = useState("")
 
-  const [selectedTopic, setSelectedTopic] = useState("[topic]") 
-  const [selectedSide, setSelectedSide] = useState("[side]") 
-  const [selectedType, setSelectedType] = useState("[type]") 
+  const [selectedTopic, setSelectedTopic] = useState("None") 
+  const [selectedSide, setSelectedSide] = useState("None") 
+  const [selectedType, setSelectedType] = useState("None") 
  
     const location = useLocation();
     const id =location.state.id;
@@ -98,19 +100,19 @@ function Home() {
         </div>
         <DocSorter topicDropdownOption={topicDropdownOption} setSelectedSide={setSelectedSide} selectedSide={selectedSide} setSelectedTopic={setSelectedTopic} selectedTopic={selectedTopic} setSelectedType={setSelectedType} selectedType={selectedType}/>
           <div className='toggle-docs-container'>
-          <button id="toggle-docs-button" className = "submit-button toggle-docs-button field-unfilled" onClick={()=>{
+          <button id="toggle-docs-button" className = "submit-button toggle-docs-button" onClick={()=>{
             setShowDocs(!showDocs)
             if(showDocs){
-              document.getElementById("toggle-docs").innerHTML= "+ docs"
-               document.getElementById("toggle-docs-button").classList.remove("field-unfilled");
-               document.getElementById("toggle-docs-button").classList.add("field-filled");
+              document.getElementById("toggle-docs").innerHTML= "+"
+              //  document.getElementById("toggle-docs-button").classList.remove("field-unfilled");
+              //  document.getElementById("toggle-docs-button").classList.add("field-filled");
             }
             else{
-              document.getElementById("toggle-docs").innerHTML= "- docs"
-              document.getElementById("toggle-docs-button").classList.add("field-unfilled");
-              document.getElementById("toggle-docs-button").classList.remove("field-filled");
+              document.getElementById("toggle-docs").innerHTML= "-"
+              // document.getElementById("toggle-docs-button").classList.add("field-unfilled");
+              // document.getElementById("toggle-docs-button").classList.remove("field-filled");
             }
-          }}><span id= "toggle-docs">- docs</span></button>
+          }}><span id= "toggle-docs">-</span></button>
           </div>
           <div className={`docs-container ${showDocs ? "docs-visible": ""} `}>
             {allDocs.length>0 ? allDocs.map((docData, index)=>{
@@ -126,15 +128,15 @@ function Home() {
                   <div className="right-side-dropdown-container">
               </div>
 
-                  {docData.minTime >0 ? <main className='d-time'>{docData.minTime} - {docData.maxTime} min</main>:<main>-</main>}
+                  {docData.minTime >0 ? <main className='d-time'>{docData.minTime} - {docData.maxTime} min</main>:<main></main>}
                  
-                  <main>-</main>
+                  {/* <main>-</main> */}
                   <a href={`${docData.docLink}`} target='_blank' rel="noreferrer"><button className='submit-button doc-link'><span>Doc Link</span></button></a>
                   
                 </div>
                 <div>
                 <button id ={`side-toggle-${docData.intRep}`} className={`outline-${docData.status.slice(0,-1)} side-dropdown-toggle item-dropdown-toggle`} onClick={()=>{
-                    document.getElementById(`itemStatusID${docData.intRep}`).classList.contains("dropdown-visible") ? document.getElementById(`side-drop-button-${docData.intRep}`).innerHTML = "+": document.getElementById(`side-drop-button-${docData.intRep}`).innerHTML = "-";
+                    //document.getElementById(`itemStatusID${docData.intRep}`).classList.contains("dropdown-visible") ? document.getElementById(`side-drop-button-${docData.intRep}`).innerHTML = "+": document.getElementById(`side-drop-button-${docData.intRep}`).innerHTML = "-";
                     document.getElementById(`side-toggle-${docData.intRep}`).classList.add("border");
                     document.getElementById(`itemStatusID${docData.intRep}`).classList.contains("dropdown-visible") ? document.getElementById(`itemStatusID${docData.intRep}`).classList.remove("dropdown-visible") :document.getElementById(`itemStatusID${docData.intRep}`).classList.add("dropdown-visible")
                     setTimeout(()=>{
@@ -142,7 +144,7 @@ function Home() {
                     }, 500);
                     }}>
                     <main>{docData.status}</main>        
-                    <main id = {`side-drop-button-${docData.intRep}`} className="dropdown-button">+</main>    
+                    {/* <main id = {`side-drop-button-${docData.intRep}`} className="dropdown-button">+</main>     */}
                 </button>
                   <div id={`itemStatusID${docData.intRep}`} className={`side-dropdown-options-overflow side-dropdown-options`}>
                       {itemStatusOptions.map((option, index)=>{

@@ -4,7 +4,7 @@
     margin-top: 1%;
 
     padding: 0.5% !important;
-    width: 15% !important;
+    width: 6% !important;
   }
 .toggle-docs-container{
     margin-right: auto;
@@ -98,7 +98,7 @@
 
 .doc-container{
     padding: 1.5%;
-    opacity: 0.45;
+    opacity: 0.3;
     border-radius: 5px;
     transition: all 0.5s;
     display: flex;

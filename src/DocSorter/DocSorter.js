@@ -50,14 +50,14 @@ function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTop
              <div className="right-side-dropdown-container">
                 <button id ="side-toggle-4" className="side-dropdown-toggle right-dropdown-toggle" onClick={()=>{
                     setTopicDropdownActive(!topicDropdownActive); 
-                    topicDropdownActive ? document.getElementById("side-drop-button-4").innerHTML = "+": document.getElementById("side-drop-button-4").innerHTML = "-";
+                    //topicDropdownActive ? document.getElementById("side-drop-button-4").innerHTML = "+": document.getElementById("side-drop-button-4").innerHTML = "-";
                     document.getElementById("side-toggle-4").classList.add("border");
                     setTimeout(()=>{
                         document.getElementById("side-toggle-4").classList.remove("border");
                     }, 500);
                     }}>
                     <main>{selectedTopic}</main>        
-                    <main id = "side-drop-button-4" className="dropdown-button">+</main>    
+                    {/* <main id = "side-drop-button-4" className="dropdown-button">+</main>     */}
                 </button>
                 <div className={`side-dropdown-options-overflow side-dropdown-options ${topicDropdownActive ? "dropdown-visible":""}`}>
                    {topicDropdownOption.map((option, index)=>{
@@ -78,7 +78,7 @@ function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTop
             <div className="right-side-dropdown-container">
                 <button id ="side-toggle-5" className="side-dropdown-toggle right-dropdown-toggle" onClick={()=>{
                     setSideDropdownActive(!sideDropdownActive); 
-                    sideDropdownActive ? document.getElementById("side-drop-button-5").innerHTML = "+": document.getElementById("side-drop-button-5").innerHTML = "-";
+                    //sideDropdownActive ? document.getElementById("side-drop-button-5").innerHTML = "+": document.getElementById("side-drop-button-5").innerHTML = "-";
                     document.getElementById("side-toggle-5").classList.add("border");
                 
                     setTimeout(()=>{
@@ -86,7 +86,7 @@ function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTop
                     }, 500);
                     }}>
                     <main>{selectedSide}</main>        
-                    <main id = "side-drop-button-5" className="dropdown-button">+</main>    
+                    {/* <main id = "side-drop-button-5" className="dropdown-button">+</main>     */}
                 </button>
                 <div className={`side-dropdown-options ${sideDropdownActive ? "dropdown-visible":""}`}>
                    {sideDropdownOption.map((option, index)=>{
@@ -106,7 +106,7 @@ function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTop
             <div className="right-side-dropdown-container">
                 <button id ="side-toggle-6" className="side-dropdown-toggle right-dropdown-toggle" onClick={()=>{
                     setTypeDropdownActive(!typeDropdownActive); 
-                    sideDropdownActive ? document.getElementById("side-drop-button-6").innerHTML = "+": document.getElementById("side-drop-button-6").innerHTML = "-";
+                    //sideDropdownActive ? document.getElementById("side-drop-button-6").innerHTML = "+": document.getElementById("side-drop-button-6").innerHTML = "-";
                     document.getElementById("side-toggle-6").classList.add("border");
 
                     setTimeout(()=>{
@@ -114,7 +114,7 @@ function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTop
                     }, 500);
                     }}>
                     <main>{selectedType}</main>        
-                    <main id = "side-drop-button-6" className="dropdown-button">+</main>    
+                    {/* <main id = "side-drop-button-6" className="dropdown-button">+</main>     */}
                 </button>
                 <div className={`side-dropdown-options ${typeDropdownActive ? "dropdown-visible":""}`}>
                    {typeDropdownOption.map((option, index)=>{

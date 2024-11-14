@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import './App.css';
@@ -101,28 +101,52 @@ async function checkTeam(setValidLogin, setStateData){
         setValidLogin(false);
     }
 }
-
-
 function Login(){
     const[stateData, setStateData] = useState({id:-1, teamName:"test"})
     const[validLogin, setValidLogin] = useState(false)
     const[teamCreatorOpen, setTeamCreatorOpen] = useState(false);
+    const [typeWriterText, setTypeWriterText] = useState("")
 
-    // const observer = new IntersectionObserver((entries) =>{
-    //     entries.forEach((entry)=>{
-    //       if(entry.isIntersecting){
-    //         entry.target.classList.remove("hide");
-    //       }
-    //       else{
-    //         entry.target.classList.add("hide");
-    //       }
-    //     })
-    //   }, { threshold:0.2})
-    // const items = document.querySelectorAll('.CLASSNAME')
-    // items.forEach((el) => observer.observe(el))
+    const fullTypeWriterText = "Sort debate files cleaner"
+    const speed = 40;
+    useEffect(()=>{
+        let i =0;
+        let lastText = ""
+        const typeCharacter = () =>{
+            if(i< fullTypeWriterText.length){
+                lastText += fullTypeWriterText.charAt(i)
+                setTypeWriterText(lastText)
+                setTimeout(typeCharacter, speed)
+            }
+            i++;
+        }
+        setTimeout(()=>{typeCharacter();}, 500)
+    }, [setTypeWriterText])
 
+    useEffect(()=>{
+        const observer = new IntersectionObserver((entries) =>{
+            entries.forEach((entry)=>{
+              if(entry.isIntersecting){
+                entry.target.classList.remove("hide");
+              }
+              else{
+                entry.target.classList.add("hide");
+              }
+            })
+          }, { threshold:0.3})
+    
+        const elements = document.querySelectorAll('.scroll-anim')
+        elements.forEach((el) => observer.observe(el));
+    })
     return(
-        <div className="login-screen-container">
+        <div>
+        <div className="scroll-anim hide">
+            <div className="title-container">
+                <main className="title-header">Doc sorter</main>
+                <main>{typeWriterText}</main>
+            </div>
+        </div>
+        <div className="login-screen-container scroll-anim hide">
             <div className={`login-register-container ${teamCreatorOpen ? "hide-container-width" : ""}`}>
                 <div className="team-creation-inner-cont">
                     <div className="login-container">
@@ -186,6 +210,7 @@ function Login(){
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
