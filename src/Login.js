@@ -144,8 +144,26 @@ function Login(){
             <div className="title-container">
                 <main className="title-header">Doc holder</main>
                 <main>{typeWriterText}</main>
+                <button className ={`submit-id get-started-button`} onClick={()=>{
+                           document.getElementById('login-cont').scrollIntoView({behavior:"smooth", block:"start", inline:"center"})
+                        }}><span>Get Started</span></button>
             </div>
         </div>
+
+        <div className="scroll-anim hide">
+            <div className="title-container">
+                <main className="desc-header">File sorting made easy</main>
+                <main>Create document containers, sort them by topic, side,
+                    type, and name. </main>
+            </div>
+        </div>
+        <div className="scroll-anim hide">
+            <div className="title-container">
+                <main className="desc-header">Safe and secure</main>
+                <main>Folders are saved behind a username id combination</main>
+            </div>
+        </div>
+
         <div id = "login-cont" className="login-screen-container scroll-anim hide">
             <div className={`login-register-container ${teamCreatorOpen ? "hide-container-width" : ""}`}>
                 <div className="team-creation-inner-cont">

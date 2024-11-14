@@ -49,6 +49,7 @@
 .side-dropdown-options-overflow{
     overflow-x: hidden !important;
     overflow-y: scroll !important;
+
 }
 .dropdown-option{
     border: none;
@@ -56,10 +57,13 @@
     background-color: rgb(255,255,255,0.05);
     opacity: 0.6;
     width: 100%;
+    
 }
 .option-container{
     display: flex;
     flex-direction: row;
+    background-color: rgb(22,22,22,1);
+    z-index: 1 !important;
 }
 .dropdown-option:hover{
     opacity: 1 !important;

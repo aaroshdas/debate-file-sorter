@@ -79,8 +79,8 @@ function Home() {
     <div>
     <div className='team-id-container'>
         <Link className='login-header' to="/"><main className='login-header'>Login</main></Link>
-        <main className='header'>Team: {team}</main>
-        <main className='header'>Team ID: {userID}</main>
+        <main className='header'>{team}</main>
+        <main className='header'>ID: {userID}</main>
     </div>
 
     <div className='body-container'>

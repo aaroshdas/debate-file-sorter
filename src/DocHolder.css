@@ -55,6 +55,7 @@
 .d-name{
     font-size: 1.2em;
     transition: all 0.1s;
+
 }
 .d-topic{
     font-size: 1em;
@@ -88,8 +89,8 @@
     overflow-y: hidden;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgb(100,100,100,0.1);
-    font-family: "Roboto";
+    background-color: rgb(100,100,100,0.05);
+    /* font-family: "Roboto"; */
     
 }
 .doc-container:hover{
