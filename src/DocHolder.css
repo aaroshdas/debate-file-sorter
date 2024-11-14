@@ -1,26 +1,7 @@
-.toggle-docs-button{
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-top: 1%;
-
-    padding: 0.5% !important;
-    width: 6% !important;
-  }
-.toggle-docs-container{
-    margin-right: auto;
-    margin-left: auto;
-    width: 100%;
-
-    margin-top: 1%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
 .docs-container{
     margin-left: auto;
     margin-right: auto;
-    margin-top: 0%;
+    margin-top: 2%;
     width: 90%;
     /* height: 80%; */
     max-height: 0%;
@@ -91,14 +72,14 @@
     font-size: 0.8em;
 }
 .doc-info{
-    width: 60%;
-    width: 90%;
+    width: 50%;
+    /* width: 90%; */
 }
 
 
 .doc-container{
     padding: 1.5%;
-    opacity: 0.3;
+    opacity: 0.35;
     border-radius: 5px;
     transition: all 0.5s;
     display: flex;
@@ -111,14 +92,14 @@
     
 }
 .doc-container:hover{
-    width: 30%;
+    width: 28%;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
     opacity: 1;
-    font-size: 1.05rem;
+    font-size: 1.01rem;
     border:1px solid rgb(100, 100, 100,0.1);
 }
 .doc-container:hover .d-name{
-    font-size: 1.4em;
+    font-size: 1.3em;
 }
 .hide-container{
     display: none;

@@ -107,7 +107,7 @@ function Login(){
     const[teamCreatorOpen, setTeamCreatorOpen] = useState(false);
     const [typeWriterText, setTypeWriterText] = useState("")
 
-    const fullTypeWriterText = "Sort debate files cleaner"
+    const fullTypeWriterText = "Store debate files cleaner"
     const speed = 40;
     useEffect(()=>{
         let i =0;
@@ -142,7 +142,7 @@ function Login(){
         <div>
         <div className="scroll-anim hide">
             <div className="title-container">
-                <main className="title-header">Doc sorter</main>
+                <main className="title-header">Doc holder</main>
                 <main>{typeWriterText}</main>
             </div>
         </div>
@@ -174,12 +174,12 @@ function Login(){
                             }}>don't have a folder? create one</button>
                     </div>
                     <div className="login-container">
-                        <button className ={`submit-id ${validLogin ? "hide-element": ""}`} onClick={()=>{
+                        <button className ={`submit-id ${validLogin ? "hide-container-max-width": ""}`} onClick={()=>{
                             checkTeam(setValidLogin, setStateData);
                         }}><span>Login</span></button>
                                         
                         <Link to="/home" state={stateData}>
-                            <button className={`field-filled to-home-link submit-id ${!validLogin ? "hide-element": ""}`}><span>Join</span></button>
+                            <button className={`field-filled to-home-link submit-id ${!validLogin ? "hide-container-max-width": ""}`}><span>Join</span></button>
                         </Link>
                     </div>
                 </div>

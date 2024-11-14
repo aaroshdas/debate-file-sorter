@@ -111,7 +111,7 @@
 }
 .to-home-link:hover{
     width: 52% !important;
-    padding: 2% !important;
+    padding: 1.5% !important;
 }
 .submit-id {
     border: none;
@@ -130,6 +130,7 @@
     margin-bottom: 3%;
     margin-top: 1%;
     margin-left: 1%;
+    overflow: hidden;
   }
 .submit-id:hover{
     width: 50%;
@@ -199,4 +200,10 @@
     font-size: 55px;
     font-family: 'Helvetica';
     font-weight:100 !important;
+}
+.hide-container-max-width{
+    overflow: hidden;
+    display: none;
+    width: 0% !important;
+    max-width: 0% !important;
 }

@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
 
-//doc editing
+
 
 import DocCreator from './DocCreator/DocCreator';
 import DocSorter from './DocSorter/DocSorter';
@@ -14,8 +14,9 @@ import './DocHolder.css'
 
 import { Redis } from "https://esm.sh/@upstash/redis";
 
-//delete toggle docs
-//add gear for config settings
+//doc editing
+
+
 const redis = new Redis({
   url: process.env.REACT_APP_UPSTASH_URL,
   token: process.env.REACT_APP_UPSTASH_TOKEN
@@ -24,6 +25,7 @@ const redis = new Redis({
 function Home() {
   const [leftSideToggled, setLeftSideToggled] = useState(true)
   const [showDocs, setShowDocs] = useState(true)
+  const [showSettings, setShowSettings] = useState(true)
   const [allDocs, setAllDocs] = useState([]) 
   const [search, setSearch] = useState("")
 
@@ -97,23 +99,11 @@ function Home() {
         <input className='input-field search-input' onChange={()=>{
             setSearch(document.getElementById("search-input").value)
             }} id ="search-input" type="text" placeholder='search files...'/>
+            <button className='setting-button' onClick={()=>{setShowSettings(!showSettings)}}>&#x2699;</button>
         </div>
-        <DocSorter topicDropdownOption={topicDropdownOption} setSelectedSide={setSelectedSide} selectedSide={selectedSide} setSelectedTopic={setSelectedTopic} selectedTopic={selectedTopic} setSelectedType={setSelectedType} selectedType={selectedType}/>
-          <div className='toggle-docs-container'>
-          <button id="toggle-docs-button" className = "submit-button toggle-docs-button" onClick={()=>{
-            setShowDocs(!showDocs)
-            if(showDocs){
-              document.getElementById("toggle-docs").innerHTML= "+"
-              //  document.getElementById("toggle-docs-button").classList.remove("field-unfilled");
-              //  document.getElementById("toggle-docs-button").classList.add("field-filled");
-            }
-            else{
-              document.getElementById("toggle-docs").innerHTML= "-"
-              // document.getElementById("toggle-docs-button").classList.add("field-unfilled");
-              // document.getElementById("toggle-docs-button").classList.remove("field-filled");
-            }
-          }}><span id= "toggle-docs">-</span></button>
-          </div>
+        <div className={`show-setting-width ${showSettings ? "hide-setting-width":""}`}>
+          <DocSorter topicDropdownOption={topicDropdownOption} setSelectedSide={setSelectedSide} selectedSide={selectedSide} setSelectedTopic={setSelectedTopic} selectedTopic={selectedTopic} setSelectedType={setSelectedType} selectedType={selectedType}/>
+        </div>
           <div className={`docs-container ${showDocs ? "docs-visible": ""} `}>
             {allDocs.length>0 ? allDocs.map((docData, index)=>{
               return <div className ={`doc-container ${(selectedTopic !== "None" &&selectedTopic !== "[topic]" && selectedTopic !== docData.topic) || (selectedSide !== "None" &&  selectedSide !== "[side]" && selectedSide !==docData.side) ||(selectedType !=="None" && selectedType !=="[type]" && selectedType!==docData.type) || (docData.docName.toLowerCase().includes(search.toLowerCase()) === false) ? "hide-container": ""}`} key={index}>
@@ -125,8 +115,6 @@ function Home() {
         
                 
                   <main className='d-info'>{docData.docInfo}</main> 
-                  <div className="right-side-dropdown-container">
-              </div>
 
                   {docData.minTime >0 ? <main className='d-time'>{docData.minTime} - {docData.maxTime} min</main>:<main></main>}
                  

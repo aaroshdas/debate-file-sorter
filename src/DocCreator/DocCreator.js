@@ -84,9 +84,9 @@ function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption, id
     const[topicDropdownActive, setTopicDropdownActive] = useState(false);
     
 
-    const[selectedSide, setSelectedSide] = useState("(side)");
-    const[selectedType, setSelectedType] = useState("(type)");
-    const[selectedTopic, setSelectedTopic] = useState("(topic)");
+    const[selectedSide, setSelectedSide] = useState("side");
+    const[selectedType, setSelectedType] = useState("type");
+    const[selectedTopic, setSelectedTopic] = useState("topic");
 
     let sideDropdownOption=[{
         label:"Negative",
@@ -264,7 +264,7 @@ function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption, id
                 </div>
             </div>
 
-            <div className={`hide-input-fields ${selectedSide !== "(side)" && selectedTopic !=="(topic)" && selectedType !== "(type)" ? "show-input-fields":""}`}>
+            <div className={`hide-input-fields ${selectedSide !== "side" && selectedTopic !=="topic" && selectedType !== "type" ? "show-input-fields":""}`}>
             <div className="input-field-container">
                 <div>
                     <main className="input-header top-input-field">doc info</main>
@@ -285,7 +285,7 @@ function DocCreator({setAllDocs, setTopicDropdownOption, topicDropdownOption, id
                 </div>
             </div>
             <div className="side-dropdown-container">
-                 <button id = "submit-button" className={`submit-button field-unfilled`} onClick={()=>{
+                 <button id = "submit-button" className={`submit-button field-unfilled white-button`} onClick={()=>{
                      createDoc(setAllDocs, selectedSide, selectedType, selectedTopic, id);
                      document.getElementById("submit-button").classList.add("border");
                      setTimeout(()=>{
