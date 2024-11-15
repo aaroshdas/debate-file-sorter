@@ -3,11 +3,44 @@ import '../DocCreator/Dropdown.css'
 import './DocSorter.css'
 
 
-function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTopic, setSelectedType, selectedType, topicDropdownOption}){
+function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTopic, setSelectedType, selectedType, topicDropdownOption, setSelectedStatus, selectedStatus}){
     const[sideDropdownActive, setSideDropdownActive] = useState(false);
     const[typeDropdownActive, setTypeDropdownActive] = useState(false);
     const[topicDropdownActive, setTopicDropdownActive] = useState(false);
-    
+    const [statusDropdownActive, setStatusDropdownActive] = useState(false)
+
+    let itemStatusOptions = [
+    {
+        label: "Any",
+        value:"Any",
+        intRep: 1
+    },
+    {
+        value:"None",
+        label:"None",
+        intRep: 0
+      },
+      {
+        label:"Empty",
+        value:"Empt.",
+        intRep: 3
+      },
+      {
+        label:"Incomplete",
+        value:"Inco.",
+        intRep: 2
+      },
+      {
+        label:"Usable",
+        value:"Usab.",
+        intRep: 2
+      },
+      {
+        label:"Complete",
+        value:"Comp.",
+        intRep: 1
+      }
+    ]
 
     let sideDropdownOption=[{
         label:"Negative",
@@ -59,7 +92,7 @@ function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTop
                     <main>{selectedTopic}</main>        
                     {/* <main id = "side-drop-button-4" className="dropdown-button">+</main>     */}
                 </button>
-                <div className={`side-dropdown-options-overflow side-dropdown-options ${topicDropdownActive ? "dropdown-visible":""}`}>
+                <div className={`side-dropdown-options ${topicDropdownActive ? "dropdown-visible":""}`}>
                    {topicDropdownOption.map((option, index)=>{
                     return <div className="option-container" key={index}><button className="dropdown-option" onClick={()=>{
                         setSelectedTopic(option.value);
@@ -116,7 +149,7 @@ function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTop
                     <main>{selectedType}</main>        
                     {/* <main id = "side-drop-button-6" className="dropdown-button">+</main>     */}
                 </button>
-                <div className={`side-dropdown-options ${typeDropdownActive ? "dropdown-visible":""}`}>
+                <div className={`side-dropdown-options ${typeDropdownActive ? "dropdown-small-visible":""}`}>
                    {typeDropdownOption.map((option, index)=>{
                     return <button className="dropdown-option" key={index} onClick={()=>{
                         setSelectedType(option.value);
@@ -129,6 +162,33 @@ function DocSorter({setSelectedSide, selectedSide, setSelectedTopic, selectedTop
                    })}
                 </div>
             </div>
+
+            <div className="right-side-dropdown-container">
+                <button id ="side-toggle-7" className="side-dropdown-toggle right-dropdown-toggle" onClick={()=>{
+                    setStatusDropdownActive(!statusDropdownActive); 
+                    document.getElementById("side-toggle-7").classList.add("border");
+
+                    setTimeout(()=>{
+                        document.getElementById("side-toggle-7").classList.remove("border");
+                    }, 500);
+                    }}>
+                    <main>{selectedStatus}</main>        
+                 
+                </button>
+                <div className={`side-dropdown-options ${statusDropdownActive ? "dropdown-small-visible":""}`}>
+                   {itemStatusOptions.map((option, index)=>{
+                    return <button className="dropdown-option" key={index} onClick={()=>{
+                        setSelectedStatus(option.value);
+                        setStatusDropdownActive(false);
+                        document.getElementById("side-toggle-7").classList.add("field-filled");
+                        if(document.getElementById("side-toggle-7").classList.contains("border")){
+                            document.getElementById("side-toggle-7").classList.remove("border");
+                        }
+                    }}>{option.label}</button>
+                   })}
+                </div>
+            </div>
+
         </div>
     )
 }

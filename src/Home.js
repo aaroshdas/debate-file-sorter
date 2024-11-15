@@ -29,9 +29,10 @@ function Home() {
   const [allDocs, setAllDocs] = useState([]) 
   const [search, setSearch] = useState("")
 
-  const [selectedTopic, setSelectedTopic] = useState("None") 
-  const [selectedSide, setSelectedSide] = useState("None") 
-  const [selectedType, setSelectedType] = useState("None") 
+  const [selectedTopic, setSelectedTopic] = useState("topic") 
+  const [selectedSide, setSelectedSide] = useState("side") 
+  const [selectedType, setSelectedType] = useState("type") 
+  const [selectedStatus, setSelectedStatus] = useState("status")
  
     const location = useLocation();
     const id =location.state.id;
@@ -102,11 +103,11 @@ function Home() {
             <button className='setting-button' onClick={()=>{setShowSettings(!showSettings)}}>&#x2699;</button>
         </div>
         <div className={`show-setting-width ${showSettings ? "hide-setting-width":""}`}>
-          <DocSorter topicDropdownOption={topicDropdownOption} setSelectedSide={setSelectedSide} selectedSide={selectedSide} setSelectedTopic={setSelectedTopic} selectedTopic={selectedTopic} setSelectedType={setSelectedType} selectedType={selectedType}/>
+          <DocSorter selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} topicDropdownOption={topicDropdownOption} setSelectedSide={setSelectedSide} selectedSide={selectedSide} setSelectedTopic={setSelectedTopic} selectedTopic={selectedTopic} setSelectedType={setSelectedType} selectedType={selectedType}/>
         </div>
           <div className={`docs-container ${showDocs ? "docs-visible": ""} `}>
             {allDocs.length>0 ? allDocs.map((docData, index)=>{
-              return <div className ={`doc-container ${(selectedTopic !== "None" &&selectedTopic !== "[topic]" && selectedTopic !== docData.topic) || (selectedSide !== "None" &&  selectedSide !== "[side]" && selectedSide !==docData.side) ||(selectedType !=="None" && selectedType !=="[type]" && selectedType!==docData.type) || (docData.docName.toLowerCase().includes(search.toLowerCase()) === false) ? "hide-container": ""}`} key={index}>
+              return <div className ={`doc-container ${(selectedTopic !== "None" &&selectedTopic !== "topic" && selectedTopic !== docData.topic) || (selectedSide !== "None" &&  selectedSide !== "side" && selectedSide !==docData.side) ||(selectedType !=="None" && selectedType !=="type" && selectedType!==docData.type) || (docData.docName.toLowerCase().includes(search.toLowerCase()) === false ||  (selectedStatus !=="Any" && selectedStatus !=="status" && selectedStatus!==docData.status)) ? "hide-container": ""}`} key={index}>
                 <div onClick={()=>{ /*window.open(docData.docLink);*/}} className='doc-info'>
                   <main className='d-topic'>{docData.topic} </main>
                   <main className='d-name'> {docData.docName}</main>
@@ -134,7 +135,7 @@ function Home() {
                     <main>{docData.status}</main>        
                     {/* <main id = {`side-drop-button-${docData.intRep}`} className="dropdown-button">+</main>     */}
                 </button>
-                  <div id={`itemStatusID${docData.intRep}`} className={`side-dropdown-options-overflow side-dropdown-options`}>
+                  <div id={`itemStatusID${docData.intRep}`} className={`side-dropdown-options`}>
                       {itemStatusOptions.map((option, index)=>{
                       return <div className="option-container" key={index}><button className="dropdown-option" onClick={()=>{
                           console.log(option.value)
